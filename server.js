@@ -22,7 +22,13 @@ http.listen(PORT, function(){
 
 //set Hostname
 var setHost = function(bridge) {
-    hostname = bridge[0]["ipaddress"];
+    if(bridge.length > 1) {
+        for(i=0; i< bridge.length; i++) {
+            if(bridge[i] !== null) {
+                hostname = bridge[i]["ipaddress"];
+            }
+        }
+    }
 };
 hue.upnpSearch().then(setHost).done();
 
